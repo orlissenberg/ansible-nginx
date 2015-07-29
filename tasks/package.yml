@@ -1,18 +1,27 @@
 # file: nginx/tasks/package.yml
 
-- name: Nginx | Make sure the ansible required dependencies are installed
-  apt:
-    pkg: python-pycurl
-    state: present
+- name: Install required dependencies.
+  apt: name={{ item }} state=present
+  with_items:
+    - python-pycurl
+    - autoconf
+    - binutils-doc
+    - bison
+    - build-essential
+    - flex
+    - gettext
 
-- name: Nginx | Add the nginx repository
-  apt_repository:
-    repo: ppa:nginx/stable
+- name: Uninstall all previously installed versions.
+  shell: apt-get remove nginx* -y
 
-- name: Nginx | Make sure nginx is installed (package)
-  apt:
-    pkg: nginx
-    state: present
+- name: Apache running on port 80?
+  service: name=apache2 state=stopped
+
+- name: Install Nginx.
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - nginx-common
+    - nginx-full
   notify:
     - restart nginx
 

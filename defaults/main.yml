@@ -51,14 +51,17 @@ nginx_access_logs:
     options: null
     filename: "access.log"
 
+
 # default site
 nginx_default_root: "{{nginx_www_dir}}/default"
 nginx_default_enable: yes
+
 
 # site inventory
 nginx_sites: []
 nginx_enabled_sites: []
 nginx_disabled_sites: []
+
 
 # source
 nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
@@ -123,6 +126,7 @@ nginx_remote_ip_var: "remote_addr"
 nginx_authorized_ips:
   - "127.0.0.1/32"
 
+
 # http_gzip_static_module configuration
 nginx_gzip_static: "off"
 
@@ -160,8 +164,10 @@ nginx_realip_real_ip_recursive: "off"
 nginx_naxsi_version: "0.52"
 nginx_naxsi_url: "https://github.com/nbs-system/naxsi/archive/{{nginx_naxsi_version}}.tar.gz"
 
+
 # ngx_pagespeed_module configuration
 nginx_ngx_pagespeed_version: 1.9.32.3
+
 
 # OpenSSL configuration
 openssl_version: "1.0.2c"
