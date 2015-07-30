@@ -3,6 +3,18 @@
 - name: Uninstall all previously installed versions.
   shell: apt-get remove nginx* -y
 
-- file: path="{{ nginx_dir }}/nginx.conf" state=absent
+- name: Nginx | Kill Nginx (old threads)
+  command: pkill nginx
+  ignore_errors: yes
 
-- file: path="{{ nginx_dir }}/mime.types" state=absent
+- file: path="{{ nginx_dir }}" state=absent
+
+- file: path="{{ nginx_source_path }}" state=absent
+
+- file: path="{{ nginx_pid }}" state=absent
+
+- file: path="{{ nginx_log_dir }}" state=absent
+  when: nginx_remove_all is defined and nginx_remove_all == true
+
+- file: path="{{ nginx_www_dir }}" state=absent
+  when: nginx_remove_all is defined and nginx_remove_all == true

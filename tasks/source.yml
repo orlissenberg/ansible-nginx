@@ -1,15 +1,15 @@
 # file: nginx/tasks/source.yml
 
-- include: user.yml
+- include: source/user.yml
 
-- include: directories.yml
+- include: shared/directories.yml
 
 - name: Nginx | Download the Nginx source release if not yet present
   get_url:
     url: "{{ nginx_source_url }}"
     dest: "/tmp/nginx-{{ nginx_source_version }}.tar.gz"
 
-- include: "modules.yml"
+- include: source/modules.yml
 
 - name: Nginx | Unpack the compressed Nginx source
   command: tar -xvzf /tmp/nginx-{{ nginx_source_version }}.tar.gz
@@ -36,7 +36,7 @@
 
 - name: Nginx | Update the symbolic link to the nginx install
   file:
-    path: /usr/local/nginx/default
+    path: "{{ nginx_source_path }}/default"
     src: "{{ nginx_source_prefix }}"
     state: link
     force: yes

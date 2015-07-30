@@ -7,19 +7,11 @@
 - include: package.yml
   when: nginx_install_method == "package"
 
-- include: build_tools.yml
+- include: source/build_tools.yml
   when: nginx_install_method == "source"
 
 - include: source.yml
   when: nginx_install_method == "source"
 
-- include: scripts.yml
-
-- include: configure.yml
-
-- include: default_site.yml
-
-- include: sites.yml
-
-- include: monit.yml
-  when: monit_protection is defined and monit_protection == true
+- include: shared/main.yml
+  when: nginx_install_method == "source" or nginx_install_method == "package"

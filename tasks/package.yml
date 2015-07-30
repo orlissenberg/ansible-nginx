@@ -11,4 +11,4 @@
   notify:
     - restart nginx
 
-- include: directories.yml
+- include: shared/directories.yml

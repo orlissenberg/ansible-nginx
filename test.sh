@@ -15,6 +15,8 @@ mkdir -p $TMP_DIR/group_vars 2> /dev/null
 cat << EOF > $TMP_DIR/group_vars/webservers
 nginx_install_method: "source"
 nginx_reinstall: true
+nginx_remove_all: true
+nginx_source_path: "/usr/local/share/nginx"
 EOF
 
 # Create Ansible config
