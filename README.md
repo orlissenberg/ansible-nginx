@@ -1,25 +1,24 @@
-## ANXS - nginx [![Build Status](https://travis-ci.org/ANXS/nginx.svg?branch=master)](https://travis-ci.org/ANXS/nginx)
+# Nginx
+
+[http://nginx.org/en/download.html](http://nginx.org/en/download.html)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
-
 #### Requirements & Dependencies
+
 
 ##### Ansible
 
-It has been tested on Ansible 1.5 and above, and depends on the following roles:
-  - ANXS.apt
-  - ANXS.build-essential
-  - ANXS.perl
-  - ANXS.monit (if you want monit protection)
+It has been tested on Ansible 1.9.2
 
 
 ##### Platforms
 
-Currently it's been developed for, and tested on Ubuntu. It is assumed to work on other Debian distributions as well.
+Currently it's been developed for and tested on Debian 7 & 8.
 
 
 #### Variables
+
 
 ##### default (nginx.conf)
 
@@ -146,6 +145,7 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 
 ##### Modules
 
+
 ###### gzip module
 - 'nginx_gzip' - whether to use gzip, can be "on" or "off"
 - 'nginx_gzip_http_version'
@@ -157,12 +157,15 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 - 'nginx_gzip_types'
 - 'nginx_gzip_disable'
 
+
 ###### http_stub_status module
 - `nginx_remote_ip_var`
 - `nginx_authorized_ips`
 
+
 ###### http_gzip_static module
 - `nginx_gzip_static` - whether to use gzip_static, can be on or off
+
 
 ###### upload_progress module
 - `nginx_upload_progress_version` - version of the upload_progress module
@@ -170,33 +173,34 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 - `nginx_upload_progress_zone_name` - assigns one name which will be used to store the per-connection tracking information. The default is proxied
 - `nginx_upload_progress_zone_size` - assigns the zone size in bytes. Default is 1m (1 megabyte)
 
+
 ###### headers_more module
 - `nginx_headers_more_version` - version of the headers_more module
+
 
 ###### http_auth_request module
 - `nginx_auth_request_release` - the release number of the http_auth_request module
 
+
 ###### http_echo module
 - `nginx_echo_version` - version of the http_echo module
+
 
 ###### http_realip module
 - `nginx_realip_header` - Sets the header to use for the RealIp Module; only accepts "X-Forwarded-For" or "X-Real-IP"
 - `nginx_realip_addresses` - Sets the addresses to use for the http_realip configuration
 - `nginx_realip_real_ip_recursive` - If recursive search is enabled, the original client address that matches one of the trusted addresses is replaced by the last non-trusted address sent in the request header field. Can be on "on" or "off". The default is "off"
 
+
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
+
 
 #### Thanks
 
 To the contributors:
 - [Jean-Denis Vauguet](https://github.com/chikamichi)
-
-
-#### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`
-
-See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
+- [ANXS](https://github.com/ANXS)
 
 
 #### License
@@ -206,4 +210,4 @@ Licensed under the MIT License. See the LICENSE file for details.
 
 #### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/ANXS/nginx/issues)!
+Are welcome.

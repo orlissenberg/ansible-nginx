@@ -1,21 +1,7 @@
 # file: nginx/tasks/package.yml
 
-- name: Install required dependencies.
-  apt: name={{ item }} state=present
-  with_items:
-    - python-pycurl
-    - autoconf
-    - binutils-doc
-    - bison
-    - build-essential
-    - flex
-    - gettext
-
-- name: Uninstall all previously installed versions.
-  shell: apt-get remove nginx* -y
-
-- name: Apache running on port 80?
-  service: name=apache2 state=stopped
+#- name: Stop apache2 if it exists.
+#  service: name=apache2 state=stopped must_exist=false
 
 - name: Install Nginx.
   apt: name={{ item }} state=present update_cache=yes

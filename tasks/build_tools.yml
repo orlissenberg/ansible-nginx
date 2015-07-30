@@ -1,0 +1,17 @@
+---
+
+- name: Install build tools
+  apt: name={{ item }} state=present
+  with_items:
+    - perl
+    - libperl-dev
+    - python-pycurl
+    - autoconf
+    - binutils-doc
+    - bison
+    - build-essential
+    - flex
+    - gettext
+    - libpcre3
+    - libpcre3-dev
+    - libssl-dev

@@ -1,18 +1,25 @@
+---
 # file: nginx/tasks/main.yml
+
+- include: clean.yml
+  when: nginx_reinstall == true
 
 - include: package.yml
   when: nginx_install_method == "package"
 
-#- include: source.yml
-#  when: nginx_install_method == "source"
+- include: build_tools.yml
+  when: nginx_install_method == "source"
 
-#- include: scripts.yml
+- include: source.yml
+  when: nginx_install_method == "source"
+
+- include: scripts.yml
 
 - include: configure.yml
 
-#- include: default_site.yml
+- include: default_site.yml
 
-#- include: sites.yml
+- include: sites.yml
 
-#- include: monit.yml
-#  when: monit_protection is defined and monit_protection == true
+- include: monit.yml
+  when: monit_protection is defined and monit_protection == true

@@ -11,10 +11,10 @@
 ### END INIT INFO
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON={{nginx_source_prefix}}/sbin/nginx
+DAEMON={{ nginx_source_prefix }}/sbin/nginx
 NAME=nginx
 DESC=nginx
-PID={{nginx_pid}}
+PID={{ nginx_pid }}
 
 # Include nginx defaults if available
 if [ -f /etc/default/nginx ]; then

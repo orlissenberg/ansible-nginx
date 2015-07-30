@@ -1,0 +1,8 @@
+---
+
+- name: Uninstall all previously installed versions.
+  shell: apt-get remove nginx* -y
+
+- file: path="{{ nginx_dir }}/nginx.conf" state=absent
+
+- file: path="{{ nginx_dir }}/mime.types" state=absent

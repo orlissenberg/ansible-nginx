@@ -13,7 +13,8 @@ EOF
 # Create group_vars for the webservers
 mkdir -p $TMP_DIR/group_vars 2> /dev/null
 cat << EOF > $TMP_DIR/group_vars/webservers
-nginx_install_method: "package"
+nginx_install_method: "source"
+nginx_reinstall: true
 EOF
 
 # Create Ansible config
