@@ -15,7 +15,7 @@
 
 - name: Nginx | Copy placeholder index.html
   copy:
-    src: "index.html"
+    src: "../../files/index.html"
     dest: "{{ nginx_default_root }}/index.html"
     owner: "{{ nginx_user }}"
     group: "{{ nginx_group }}"
@@ -24,7 +24,7 @@
 
 - name: Nginx | Update the default site configuration
   template:
-    src: default.site.j2
+    src: "../../templates/default.site.j2"
     dest: "{{ nginx_dir }}/sites-available/default"
     owner: root
     group: root

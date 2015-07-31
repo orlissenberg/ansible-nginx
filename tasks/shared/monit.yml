@@ -2,7 +2,7 @@
 
 - name: Nginx | | (Monit) Copy the nginx monit service file
   template:
-    src: etc_monit_conf.d_nginx.j2
+    src: "../../templates/etc_monit_conf.d_nginx.j2"
     dest: /etc/monit/conf.d/nginx
   notify:
     - restart monit

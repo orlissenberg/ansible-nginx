@@ -7,6 +7,10 @@
   command: pkill nginx
   ignore_errors: yes
 
+- file: path="/etc/init.d/nginx" state=absent
+
+- file: path="/etc/init.d/nginx.dpkg-dist" state=absent
+
 - file: path="{{ nginx_dir }}" state=absent
 
 - file: path="{{ nginx_source_path }}" state=absent
@@ -18,3 +22,7 @@
 
 - file: path="{{ nginx_www_dir }}" state=absent
   when: nginx_remove_all is defined and nginx_remove_all == true
+
+- shell: systemctl disable nginx
+
+- shell: systemctl unmask nginx
