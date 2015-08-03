@@ -3,6 +3,7 @@
 nginx_install_method: "source"
 nginx_source_version: "1.9.3"
 nginx_reinstall: false
+nginx_uninstall_apache: false
 
 nginx_user: www-data
 nginx_group: www-data

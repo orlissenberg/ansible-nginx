@@ -17,6 +17,7 @@ nginx_install_method: "source"
 nginx_reinstall: true
 nginx_remove_all: true
 nginx_source_path: "/usr/local/share/nginx"
+nginx_uninstall_apache: true
 EOF
 
 # Create Ansible config
