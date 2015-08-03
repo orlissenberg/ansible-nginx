@@ -2,6 +2,8 @@
 
 [http://nginx.org/en/download.html](http://nginx.org/en/download.html)
 
+[Nginx HTTP server boilerplate configs](https://github.com/h5bp/server-configs-nginx)
+
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
 #### Requirements & Dependencies

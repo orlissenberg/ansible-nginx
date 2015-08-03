@@ -23,6 +23,12 @@
 - file: path="{{ nginx_www_dir }}" state=absent
   when: nginx_remove_all is defined and nginx_remove_all == true
 
+# Remove Nginx from startup (Debian 8)
+
 - shell: systemctl disable nginx
+  when: ansible_distribution == 'Debian'
+        and ansible_distribution_major_version == '8'
 
 - shell: systemctl unmask nginx
+  when: ansible_distribution == 'Debian'
+        and ansible_distribution_major_version == '8'
