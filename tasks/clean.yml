@@ -1,7 +1,7 @@
 ---
 
 - name: Uninstall all previously installed versions.
-  shell: apt-get remove nginx* -y
+  apt: name=nginx* state=absent purge=yes
 
 - name: Nginx | Kill Nginx (old threads)
   command: pkill nginx
