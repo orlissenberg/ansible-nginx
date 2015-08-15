@@ -18,3 +18,5 @@
 
 - include: shared/main.yml
   when: nginx_install_method == "source" or nginx_install_method == "package"
+
+- service: name=nginx state=started enabled=yes
