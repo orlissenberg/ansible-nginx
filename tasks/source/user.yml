@@ -11,6 +11,15 @@
     path: "{{ nginx_www_dir }}"
     state: directory
 
+- name: Check if php7.1-fpm exists
+  stat: path=/etc/init.d/php7.1-fpm
+  register: service_php71_fpm
+
+- name: Stop php7.1-fpm
+  service: name=php7.1-fpm state=stopped
+  when: service_php71_fpm.stat.exists
+  register: service_php71_fpm_stopped
+
 - name: Nginx | Make sure the nginx user is present
   user:
     name: "{{ nginx_user }}"
@@ -32,12 +41,16 @@
 
 - name: Nginx | Check the current password expiry
   command: grep {{ nginx_user }} /etc/shadow
-  sudo: yes
+  become: true
   register: nginx_old_password
   changed_when: false
 
 - name: Nginx | Set the right expiration on the nginx user
   shell: "chage -I -1 -E -1 -m -1 -M -1 -W -1 -E -1 {{ nginx_user }} && grep {{ nginx_user }} /etc/shadow"
-  sudo: yes
+  become: true
   register: nginx_new_password
   changed_when: nginx_new_password.stdout != nginx_old_password.stdout
+
+- name: Stop php7.1-fpm
+  service: name=php7.1-fpm state=started
+  when: service_php71_fpm.stat.exists

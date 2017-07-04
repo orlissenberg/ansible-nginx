@@ -2,9 +2,9 @@
 
 - name: restart nginx
   service: name=nginx state=restarted
-  sudo: yes
+  become: true
   when: not nginx_first_start.changed
 
 - name: reload nginx
   service: name=nginx state=reloaded
-  sudo: yes
+  become: true

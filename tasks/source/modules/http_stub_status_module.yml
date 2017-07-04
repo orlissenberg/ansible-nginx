@@ -1,11 +1,11 @@
 # file: nginx/tasks/modules/http_stub_status_module.yml
 # configure flag: --with-http_stub_status_module
 
-- include: _authorized_ips.yml
+- include: authorized_ips.yml
 
 - name: Nginx | Modules | Make sure the nginx status configuration is updated
   template:
-    src: ../../../templates/modules/nginx_status.j2
+    src: modules/nginx_status.j2
     dest: "{{ nginx_dir }}/sites-available/nginx_status"
     owner: root
     group: root

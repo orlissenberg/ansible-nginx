@@ -13,7 +13,6 @@ Ansible role which installs and configures Nginx, from a package or from source 
 
 It has been tested on Ansible 1.9.2
 
-
 ##### Platforms
 
 Currently it's been developed for and tested on Debian 7 & 8.

@@ -26,12 +26,12 @@
   ignore_errors: yes
   when: nginx_flags.changed
 
+- name: Show configuration flags
+  debug:
+    msg: "{{ nginx_source_configure_flags }}"
+
 - name: Nginx | Compile the Nginx source
-  shell: >
-    cd /tmp/nginx-{{ nginx_source_version }} &&
-    ./configure {{ nginx_source_configure_flags }} &&
-    make &&
-    make install
+  shell: "cd /tmp/nginx-{{ nginx_source_version }} && ./configure {{ nginx_source_configure_flags }} && make && make install"
   when: nginx_flags.changed
 
 - name: Nginx | Update the symbolic link to the nginx install
@@ -40,6 +40,17 @@
     src: "{{ nginx_source_prefix }}"
     state: link
     force: yes
+
+# https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal
+- name: Nginx | Install the systemd unit file
+  template:
+    src: nginx.unit.j2
+    dest: /lib/systemd/system/nginx.service
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - restart nginx
 
 - name: Nginx | Install the upstart init script
   template:

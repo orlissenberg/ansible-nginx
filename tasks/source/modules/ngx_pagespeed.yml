@@ -1,32 +1,36 @@
 # file: nginx/tasks/modules/ngx_pagespeed.yml
-# configure flag: --add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta
+# configure flag: --add-module=/tmp/ngx_pagespeed-{{nginx_ngx_pagespeed_version}}
 
 - name: Nginx | Modules | Make sure the dependences are installed
   apt:
     pkg: "{{ item }}"
   with_items:
+    - build-essential
     - zlib1g-dev
     - libpcre3
     - libpcre3-dev
+    - unzip
+    - vim
 
 - name: Nginx | Modules | Download the ngx_pagespeed source
   get_url:
-    url: "https://github.com/pagespeed/ngx_pagespeed/archive/release-{{ nginx_ngx_pagespeed_version }}-beta.tar.gz"
-    dest: "/tmp/ngx_pagespeed_module.tar.gz"
+    url: "https://github.com/pagespeed/ngx_pagespeed/archive/v{{ nginx_ngx_pagespeed_version }}.tar.gz"
+    dest: "/tmp/ngx_pagespeed_module-{{ nginx_ngx_pagespeed_version }}.tar.gz"
 
 - name: Nginx | Modules | Unpack the ngx_pagespeed source
-  command: tar -xvzf /tmp/ngx_pagespeed_module.tar.gz
+  command: "tar -xvzf /tmp/ngx_pagespeed_module-{{ nginx_ngx_pagespeed_version }}.tar.gz"
   args:
     chdir: /tmp
-    creates: "/tmp/ngx_pagespeed-release-{{ nginx_ngx_pagespeed_version }}-beta"
+    creates: "/tmp/ngx_pagespeed-{{ nginx_ngx_pagespeed_version }}"
 
+# https://modpagespeed.com/doc/build_ngx_pagespeed_from_source !!
 - name: Nginx | Modules | Download the psol source
   get_url:
-    url: "https://dl.google.com/dl/page-speed/psol/{{nginx_ngx_pagespeed_version}}.tar.gz"
-    dest: "/tmp/ngx_pagespeed-release-{{ nginx_ngx_pagespeed_version }}-beta/psol.tar.gz"
+    url: "https://dl.google.com/dl/page-speed/psol/{{ nginx_ngx_psol_version }}.tar.gz"
+    dest: "/tmp/ngx_pagespeed-{{ nginx_ngx_pagespeed_version }}/psol-{{ nginx_ngx_psol_version }}.tar.gz"
 
 - name: Nginx | Modules | Unpack the psol source
-  command: "tar -xvzf /tmp/ngx_pagespeed-release-{{ nginx_ngx_pagespeed_version }}-beta/psol.tar.gz"
+  command: "tar -xvzf /tmp/ngx_pagespeed-{{ nginx_ngx_pagespeed_version }}/psol-{{ nginx_ngx_psol_version }}.tar.gz"
   args:
-    chdir: "/tmp/ngx_pagespeed-release-{{ nginx_ngx_pagespeed_version }}-beta"
-    creates: "/tmp/ngx_pagespeed-release-{{ nginx_ngx_pagespeed_version }}-beta/psol"
+    chdir: "/tmp/ngx_pagespeed-{{ nginx_ngx_pagespeed_version }}"
+    creates: "/tmp/ngx_pagespeed-{{ nginx_ngx_pagespeed_version }}/psol"
