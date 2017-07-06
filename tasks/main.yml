@@ -1,6 +1,9 @@
 ---
 # file: nginx/tasks/main.yml
 
+- shell: apt-get remove --purge apache2
+  when: nginx_uninstall_apache == true
+
 - apt: name=apache2* state=absent purge=yes
   when: nginx_uninstall_apache == true
 
